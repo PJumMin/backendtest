@@ -6,7 +6,6 @@ public class UsersRequest {
 
     @Data
     public static class SaveDTO {
-        Integer id;
         String name;
 
         public Users toEntity() {
@@ -14,5 +13,10 @@ public class UsersRequest {
                     .name(name)
                     .build();
         }
+    }
+
+    @Data
+    public static class UpdateDTO {
+        String name;
     }
 }

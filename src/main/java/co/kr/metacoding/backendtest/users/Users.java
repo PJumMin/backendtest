@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@ToString
 @NoArgsConstructor
 @Getter
 @Table(name = "users_tb")
@@ -19,6 +21,10 @@ public class Users {
     public Users(String name, int id) {
         this.name = name;
         this.id = id;
+    }
+
+    public void update(String name) {
+        this.name = name;
     }
 }
 

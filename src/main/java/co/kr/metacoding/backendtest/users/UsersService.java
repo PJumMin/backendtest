@@ -14,4 +14,19 @@ public class UsersService {
         Users usersPS = usersRepository.save(users.toEntity());
         return usersPS;
     }
+
+    public Users detail(Integer id) {
+        Users usersPS = usersRepository.findById(id);
+        return usersPS;
+    }
+
+    @Transactional
+    public Users update(Integer id, UsersRequest.UpdateDTO updateDTO) {
+        Users usersPS = usersRepository.findById(id);
+        // 더티채킹
+        usersPS.update(updateDTO.getName());
+
+
+        return usersPS;
+    }
 }
