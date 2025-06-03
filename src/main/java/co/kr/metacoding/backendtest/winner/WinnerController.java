@@ -1,6 +1,9 @@
 package co.kr.metacoding.backendtest.winner;
 
 import co.kr.metacoding.backendtest._core.util.Resp;
+
+import co.kr.metacoding.backendtest.lottos.LottosService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -41,8 +41,8 @@ public class LottosService {
         return new LottosRespons.RandomNumberDTO(numbers);
     }
 
-
     public LottosRespons.LottosDTO findNumber() {
+
         List<Lottos> lottosList = lottosRepository.findAll();
 
         return new LottosRespons.LottosDTO(lottosList);
