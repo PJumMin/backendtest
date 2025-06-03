@@ -14,9 +14,9 @@ public class Lottos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Integer numbers;
+    private String numbers;
 
-    public Lottos(int id, Integer numbers) {
+    public Lottos(int id, String numbers) {
         this.id = id;
         this.numbers = numbers;
     }
