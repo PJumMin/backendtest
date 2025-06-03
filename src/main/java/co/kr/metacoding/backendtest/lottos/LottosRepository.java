@@ -16,4 +16,9 @@ public class LottosRepository {
         Query quert = em.createQuery("select l from Lottos l", Lottos.class);
         return quert.getResultList();
     }
+
+    public void save(Lottos lottos) {
+        em.persist(lottos);
+    }
+
 }
