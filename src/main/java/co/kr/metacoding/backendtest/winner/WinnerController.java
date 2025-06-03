@@ -15,9 +15,8 @@ public class WinnerController {
     private final LottosService lottosService;
 
     @PostMapping("/batch")
-    public WinnerRespons.BatchDTO batch() {
+    public String batch() {
         winnerService.batch();
-
         return null;
     }
 

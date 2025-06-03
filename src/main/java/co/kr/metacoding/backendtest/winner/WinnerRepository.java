@@ -16,4 +16,9 @@ public class WinnerRepository {
         Query query = em.createQuery("select w from Winner w", Winner.class);
         return query.getResultList();
     }
+
+    public void save(Winner winner) {
+        em.persist(winner);
+
+    }
 }
