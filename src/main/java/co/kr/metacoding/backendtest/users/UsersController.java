@@ -26,7 +26,7 @@ public class UsersController {
     }
 
     @GetMapping("/users/{id}")
-    public Users UsersDetail(@PathVariable Integer id) {
+    public Users usersDetail(@PathVariable Integer id) {
         return usersService.detail(id);
 
 //        Resp Util을 사용하여 status, msg, body 데이터가 보이는 코드

@@ -15,4 +15,12 @@ public class LottosRespons {
         }
     }
 
+    @Data
+    public static class LottosDTO {
+        private List<Lottos> numbers;
+
+        public LottosDTO(List<Lottos> numbers) {
+            this.numbers = numbers;
+        }
+    }
 }

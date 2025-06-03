@@ -1,5 +1,6 @@
 package co.kr.metacoding.backendtest.lottos;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 public class LottosService {
     private final LottosRepository lottosRepository;
 
+    @Transactional
     public LottosRespons.RandomNumberDTO addNumber() {
         List<Integer> numbers = new ArrayList<>();
         Random random = new Random();
@@ -40,8 +42,9 @@ public class LottosService {
     }
 
 
-    public List<Lottos> findNumber() {
+    public LottosRespons.LottosDTO findNumber() {
         List<Lottos> lottosList = lottosRepository.findAll();
-        return lottosList;
+
+        return new LottosRespons.LottosDTO(lottosList);
     }
 }
