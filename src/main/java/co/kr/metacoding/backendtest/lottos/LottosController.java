@@ -1,8 +1,12 @@
 package co.kr.metacoding.backendtest.lottos;
 
+import co.kr.metacoding.backendtest._core.util.Resp;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -14,5 +18,11 @@ public class LottosController {
         return lottosService.addNumber();
 //        LottosRespons.RandomNumberDTO resp = lottosService.addNumber();
 //        return Resp.OK(resp);
+    }
+
+    @GetMapping("/lottos")
+    public Resp findNumber() {
+        List<Lottos> resp = lottosService.findNumber();
+        return Resp.OK(resp);
     }
 }
