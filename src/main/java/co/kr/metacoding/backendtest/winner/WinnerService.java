@@ -2,6 +2,7 @@ package co.kr.metacoding.backendtest.winner;
 
 import co.kr.metacoding.backendtest.lottos.Lottos;
 import co.kr.metacoding.backendtest.lottos.LottosRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,47 +17,65 @@ public class WinnerService {
     private final WinnerRepository winnerRepository;
     private final LottosRepository lottosRepository;
 
+    @Transactional
     public Winner batch() {
-        List<Integer> batchnum = new ArrayList<>();
+        List<Integer> batchNums = new ArrayList<>();
         Random random = new Random();
 
-        while (batchnum.size() < 6) {
-            // 1~45까지 난수 생성
+        while (batchNums.size() < 6) {
             int num = random.nextInt(45) + 1;
-            // 중복제거
-            if (!batchnum.contains(num)) {
-                batchnum.add(num);
+            if (!batchNums.contains(num)) {
+                batchNums.add(num);
             }
         }
-        // 정렬
-        Collections.sort(batchnum);
 
-        List<Lottos> LottoList = lottosRepository.findAll();
+        Collections.sort(batchNums);
 
-        int matchCount = 0;
-        for (Integer num : batchnum) {
-            if (LottoList.contains(num)) {
-                matchCount++;
+        List<Lottos> lottosList = lottosRepository.findAll();
+
+        int bestMatchCount = 0;
+        Lottos bestLotto = null;
+
+        for (Lottos lotto : lottosList) {
+            String cleaned = lotto.getNumbers().replace("[", "").replace("]", "");
+            String[] split = cleaned.split(",");
+
+            List<Integer> userNums = new ArrayList<>();
+            for (String s : split) {
+                userNums.add(Integer.parseInt(s.trim()));
+            }
+
+            int match = 0;
+            for (Integer num : batchNums) {
+                if (userNums.contains(num)) {
+                    match++;
+                }
+            }
+
+            if (match > bestMatchCount) {
+                bestMatchCount = match;
+                bestLotto = lotto;
             }
         }
+
 
         String rank = "";
-        if (matchCount == 6) {
+        if (bestMatchCount == 6) {
             rank = "1등";
-        } else if (matchCount == 5) {
+        } else if (bestMatchCount == 5) {
             rank = "2등";
-        } else if (matchCount == 4) {
+        } else if (bestMatchCount == 4) {
             rank = "3등";
-        } else if (matchCount == 3) {
+        } else if (bestMatchCount == 3) {
             rank = "4등";
-        } else if (matchCount == 2) {
+        } else if (bestMatchCount == 2) {
             rank = "5등";
         } else {
             rank = "꽝";
         }
 
-        Winner winner = new WinnerRequest.SaveDTO(rank).toEntity();
-
+        Winner winner = Winner.create(rank, bestLotto);
+        winnerRepository.save(winner);
         return winner;
     }
 

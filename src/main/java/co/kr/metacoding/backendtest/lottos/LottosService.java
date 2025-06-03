@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -18,18 +19,26 @@ public class LottosService {
         Random random = new Random();
 
         while (numbers.size() < 6) {
-            // 1~45까지 난수 생성
             int num = random.nextInt(45) + 1;
-            // 중복제거
             if (!numbers.contains(num)) {
                 numbers.add(num);
             }
         }
-        // 정렬
+
         Collections.sort(numbers);
+
+        // 정제된 문자열로 변환 (대괄호 없이)
+        String numberString = numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(",")); // 예: "3,12,18,24,35,41"
+
+        // DB 저장
+        Lottos lotto = new Lottos(0, numberString);
+        lottosRepository.save(lotto);
 
         return new LottosRespons.RandomNumberDTO(numbers);
     }
+
 
     public List<Lottos> findNumber() {
         List<Lottos> lottosList = lottosRepository.findAll();

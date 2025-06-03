@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Getter
-@Table(name = "winner")
+@Table(name = "winner_tb")
 @Entity
 public class Winner {
     @Id
@@ -27,6 +27,15 @@ public class Winner {
         this.rank = rank;
         this.lottos = lottos;
     }
+
+    // Winner.java
+    public static Winner create(String rank, Lottos lottos) {
+        return Winner.builder()
+                .rank(rank)
+                .lottos(lottos)
+                .build();
+    }
+
 }
 
 
