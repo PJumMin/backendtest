@@ -1,5 +1,16 @@
 package co.kr.metacoding.backendtest.users;
 
-public class Users {
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@Getter
+@Table(name = "users_tb")
+@Entity
+public class Users {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
 }
