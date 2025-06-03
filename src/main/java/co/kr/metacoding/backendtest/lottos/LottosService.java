@@ -30,4 +30,9 @@ public class LottosService {
 
         return new LottosRespons.RandomNumberDTO(numbers);
     }
+
+    public List<Lottos> findNumber() {
+        List<Lottos> lottosList = lottosRepository.findAll();
+        return lottosList;
+    }
 }
