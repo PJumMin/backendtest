@@ -17,4 +17,16 @@ public class WinnerRespons {
             this.lottosId = lottosId;
         }
     }
+
+    @Data
+    public static class WinnerDTO {
+        private String rank;
+        private String numbers;
+
+        public WinnerDTO(Winner winner) {
+            this.rank = winner.getRank();
+            this.numbers = winner.getLottos().getNumbers();
+        }
+    }
+
 }

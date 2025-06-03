@@ -10,5 +10,8 @@ VALUES ('[3, 7, 12, 18, 33, 42]'),
        ('[6, 12, 18, 24, 30, 36]'),
        ('[15, 20, 25, 30, 35, 40]');
 
+INSERT INTO winner_tb (id, rank, lottos_id)
+VALUES (200, '5등', 1);
+
 insert into users_tb(name)
 values ('ssar');

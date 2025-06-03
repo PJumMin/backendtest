@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @RestController
 public class LottosController {
@@ -21,7 +19,7 @@ public class LottosController {
 
     @GetMapping("/lottos")
     public Resp findNumber() {
-        List<Lottos> resp = lottosService.findNumber();
+        LottosRespons.LottosDTO resp = lottosService.findNumber();
         return Resp.OK(resp);
     }
 }
