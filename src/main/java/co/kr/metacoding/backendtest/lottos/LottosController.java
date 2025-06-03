@@ -14,10 +14,9 @@ public class LottosController {
     private final LottosService lottosService;
 
     @PostMapping("/lottos")
-    public LottosRespons.RandomNumberDTO addNumber() {
-        return lottosService.addNumber();
-//        LottosRespons.RandomNumberDTO resp = lottosService.addNumber();
-//        return Resp.OK(resp);
+    public Resp addNumber() {
+        LottosRespons.RandomNumberDTO resp = lottosService.addNumber();
+        return Resp.OK(resp);
     }
 
     @GetMapping("/lottos")
